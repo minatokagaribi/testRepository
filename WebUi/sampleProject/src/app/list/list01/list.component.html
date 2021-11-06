@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="page" style="margin: 10px;">
+    <p>ノウハウ一覧</p>
+    <div class="condition" style="height: 100px;">
+        <label>■検索条件</label>
+        <div style="height: 50px;">
+            <div>
+                <label>件名</label>
+                <input style="margin-left: 5px;" type="text" [(ngModel)]="condition.kenmei" />
+            </div>
+            <div>
+                <label>タグ</label>
+                <label style="margin-left: 5px">Excel</label>
+                <input type="checkbox" [(ngModel)]="condition.tagExcel" />
+                <label style="margin-left: 5px;">Angular</label>
+                <input type="checkbox" [(ngModel)]="condition.tagAngular" />
+                <label style="margin-left: 5px;">Java</label>
+                <input type="checkbox" [(ngModel)]="condition.tagJava" />
+                <label style="margin-left: 5px;">その他</label>
+                <input type="checkbox" [(ngModel)]="condition.tagOther" />
+            </div>
+        </div>
+        <div>
+            <button (click)="search()">検索</button>
+        </div>
+    </div>
+    <hr>
+    <div class="result">
+        <label>■検索結果</label>
+        <ag-grid-angular style="width: 100%; height: 300px;" class="ag-theme-alpine"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs">
+        </ag-grid-angular>
+    </div>
+    
+    
+</div>
+

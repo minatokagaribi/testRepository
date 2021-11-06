@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['regist']);
   }
 
+  public list(): void {
+    this.router.navigate(['list']);
+  }
+
 }

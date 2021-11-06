@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { loginData } from './login.data';
+import { loginInputData } from './login.inputData';
 
 @Component({
   selector: 'app-login',
@@ -32,12 +34,18 @@ export class LoginComponent implements OnInit {
   }
 
   private getUserName() {
-    this.http.get<User>(this.url).subscribe({
+    let inputData = new loginInputData;
+    let data = new loginData;
+    data.loginId = this.loginId;
+    data.password = this.password;
+
+    inputData.loginData = data;
+
+    this.http.post<User>(this.url, data).subscribe({
       next: data => {
-        this.resultUser = data[0];
         const param = {
           loginId: this.loginId,
-          name: this.resultUser.name
+          name: data.loginNm
         }
         this.router.navigate(['home', param]);
       },
@@ -50,7 +58,7 @@ export class LoginComponent implements OnInit {
 }
 
 export class User {
-  public id: string;
-  public name: string;
+  public loginId: string;
+  public loginNm: string;
   public email: string;
 }
